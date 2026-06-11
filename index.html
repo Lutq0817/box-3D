@@ -47,48 +47,11 @@
         .start-title { font-size: 42px; font-weight: 700; background: linear-gradient(135deg, #ffffff, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
         .start-sub { font-size: 16px; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; }
         .start-studio { font-size: 13px; color: #6366f1; margin-bottom: 30px; letter-spacing: 2px; font-weight: 500; }
-        
-        /* 按钮组容器 */
-        .start-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .start-btn {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border: none;
-            padding: 14px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(59,130,246,0.4);
-        }
-        .start-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(59,130,246,0.6);
-        }
-        .start-link-btn {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-            padding: 14px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(16,185,129,0.4);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .start-link-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(16,185,129,0.6);
-        }
+        .start-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 10px; }
+        .start-btn { background: linear-gradient(135deg, #3b82f6, #8b5cf6); border: none; padding: 14px 32px; font-size: 16px; font-weight: 600; color: white; border-radius: 50px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 20px rgba(59,130,246,0.4); }
+        .start-btn:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(59,130,246,0.6); }
+        .start-link-btn { background: linear-gradient(135deg, #10b981, #059669); border: none; padding: 14px 32px; font-size: 16px; font-weight: 600; color: white; border-radius: 50px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 20px rgba(16,185,129,0.4); text-decoration: none; display: inline-block; }
+        .start-link-btn:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(16,185,129,0.6); }
 
         /* 主界面 */
         .main-app {
@@ -414,7 +377,7 @@
             transform: scale(1.2);
         }
         .size-input {
-            width: 55px;
+            width: 65px;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 25px;
@@ -907,7 +870,7 @@
         let fireworksCtx = fireworksCanvas.getContext('2d');
         let particles = [];
         let fireworksAnimationId = null;
-        let lastWasteState = null;
+        let lastWastePercent = -1;
         
         function resizeFireworksCanvas() {
             fireworksCanvas.width = window.innerWidth;
@@ -918,17 +881,10 @@
         
         class Particle {
             constructor(x, y, vx, vy, color, size) {
-                this.x = x;
-                this.y = y;
-                this.vx = vx;
-                this.vy = vy;
-                this.color = color;
-                this.size = size;
-                this.gravity = 0.2;
-                this.alpha = 1;
-                this.decay = 0.02;
+                this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                this.color = color; this.size = size;
+                this.gravity = 0.2; this.alpha = 1; this.decay = 0.02;
             }
-            
             update() {
                 this.vx *= 0.98;
                 this.vy += this.gravity;
@@ -937,7 +893,6 @@
                 this.alpha -= this.decay;
                 return this.alpha > 0;
             }
-            
             draw(ctx) {
                 ctx.globalAlpha = this.alpha;
                 ctx.fillStyle = this.color;
@@ -963,15 +918,9 @@
         
         function startFireworks() {
             if (fireworksAnimationId) cancelAnimationFrame(fireworksAnimationId);
-            
-            // 清除旧粒子
             particles = [];
-            
-            // 创建多个烟花
             const centerX = fireworksCanvas.width / 2;
             const centerY = fireworksCanvas.height / 2;
-            
-            // 连续发射多个烟花
             for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
                     const offsetX = (Math.random() - 0.5) * 200;
@@ -979,8 +928,6 @@
                     createFirework(centerX + offsetX, centerY + offsetY);
                 }, i * 150);
             }
-            
-            // 再补一轮
             setTimeout(() => {
                 for (let i = 0; i < 6; i++) {
                     setTimeout(() => {
@@ -993,7 +940,6 @@
             
             function animateFireworks() {
                 fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-                
                 let hasActive = false;
                 for (let i = 0; i < particles.length; i++) {
                     const active = particles[i].update();
@@ -1005,7 +951,6 @@
                         i--;
                     }
                 }
-                
                 if (hasActive) {
                     fireworksAnimationId = requestAnimationFrame(animateFireworks);
                 } else {
@@ -1013,11 +958,9 @@
                     fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
                 }
             }
-            
             animateFireworks();
         }
         
-        // 闪烁警告动画
         let blinkTimeout = null;
         function triggerWasteBlink() {
             const resultCard = document.getElementById('resultCard');
@@ -1322,8 +1265,7 @@
             });
         }
 
-        // 更新浪费提示UI（新增烟花和闪烁触发）
-        let lastWastePercent = -1;
+        // 更新浪费提示UI
         function updateWasteUI(wastePercent) {
             const resultCard = document.getElementById('resultCard');
             const resultTitle = document.getElementById('resultTitle');
@@ -1335,20 +1277,16 @@
             
             const hasWaste = wastePercent > 0.01;
             
-            // 检测状态变化
             const wasPerfect = lastWastePercent !== -1 && lastWastePercent <= 0.01;
             const isNowPerfect = !hasWaste;
             
             if (isNowPerfect && !wasPerfect && boxes.length > 0) {
-                // 从有浪费变成完美贴合 -> 放烟花
                 startFireworks();
                 showToast('🎉 完美贴合！放烟花庆祝！ 🎉');
             } else if (hasWaste && lastWastePercent <= 0.01 && boxes.length > 0) {
-                // 从完美变成有浪费 -> 红色闪烁
                 triggerWasteBlink();
                 showToast('⚠️ 出现浪费空间，请优化堆叠方式');
             } else if (hasWaste && wastePercent > lastWastePercent + 5 && boxes.length > 0) {
-                // 浪费增加超过5% -> 闪烁警告
                 triggerWasteBlink();
             }
             
@@ -1408,23 +1346,23 @@
                         <div class="box-sliders">
                             <div class="slider-group">
                                 <label>长</label>
-                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.l}" 
+                                <input type="range" min="0.3" max="10" step="0.1" value="${b.l}" 
                                        oninput="window.updateSizeFromSlider(${b.id}, 'l', this.value)">
-                                <input type="number" class="size-input" value="${b.l.toFixed(2)}" step="0.05"
+                                <input type="number" class="size-input" value="${b.l.toFixed(2)}" step="0.1" min="0.3" max="10"
                                        onchange="window.updateSizeFromInput(${b.id}, 'l', this.value)">
                             </div>
                             <div class="slider-group">
                                 <label>宽</label>
-                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.w}" 
+                                <input type="range" min="0.3" max="10" step="0.1" value="${b.w}" 
                                        oninput="window.updateSizeFromSlider(${b.id}, 'w', this.value)">
-                                <input type="number" class="size-input" value="${b.w.toFixed(2)}" step="0.05"
+                                <input type="number" class="size-input" value="${b.w.toFixed(2)}" step="0.1" min="0.3" max="10"
                                        onchange="window.updateSizeFromInput(${b.id}, 'w', this.value)">
                             </div>
                             <div class="slider-group">
                                 <label>高</label>
-                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.h}" 
+                                <input type="range" min="0.3" max="10" step="0.1" value="${b.h}" 
                                        oninput="window.updateSizeFromSlider(${b.id}, 'h', this.value)">
-                                <input type="number" class="size-input" value="${b.h.toFixed(2)}" step="0.05"
+                                <input type="number" class="size-input" value="${b.h.toFixed(2)}" step="0.1" min="0.3" max="10"
                                        onchange="window.updateSizeFromInput(${b.id}, 'h', this.value)">
                             </div>
                         </div>
@@ -1465,7 +1403,7 @@
             const b = boxes.find(b => b.id === id);
             if (b) {
                 let v = parseFloat(val);
-                v = Math.min(2.5, Math.max(0.3, v));
+                v = Math.min(10, Math.max(0.3, v));
                 b[axis] = v;
                 updateBoxVisual(b);
                 refreshUI();
@@ -1476,7 +1414,7 @@
             const b = boxes.find(b => b.id === id);
             if (b) {
                 let v = parseFloat(val);
-                v = Math.min(2.5, Math.max(0.3, v));
+                v = Math.min(10, Math.max(0.3, v));
                 b[axis] = v;
                 updateBoxVisual(b);
                 refreshUI();
@@ -1496,14 +1434,14 @@
         };
 
         function addBox(name, l, w, h, x, z, y) {
-            let newX = x !== undefined ? x : (Math.random() - 0.5) * 10;
-            let newZ = z !== undefined ? z : (Math.random() - 0.5) * 8;
+            let newX = x !== undefined ? x : (Math.random() - 0.5) * 12;
+            let newZ = z !== undefined ? z : (Math.random() - 0.5) * 10;
             let newY = y !== undefined ? y : 0;
             
             const newBox = {
                 id: nextId++,
                 name: name || `盒子${nextId-1}`,
-                l: l || 1.0, w: w || 0.8, h: h || 0.6,
+                l: l || 2.0, w: w || 1.5, h: h || 1.2,
                 x: newX, z: newZ, y: newY,
                 color: getColor(boxes.length),
             };
@@ -1515,8 +1453,8 @@
                 for (let other of boxes) {
                     if (checkOverlap(newBox, other)) {
                         hasOverlap = true;
-                        newBox.x = (Math.random() - 0.5) * 10;
-                        newBox.z = (Math.random() - 0.5) * 8;
+                        newBox.x = (Math.random() - 0.5) * 12;
+                        newBox.z = (Math.random() - 0.5) * 10;
                         break;
                     }
                 }
@@ -1556,7 +1494,7 @@
         // 堆叠吸附检测
         function findBestSnapPosition(dragged, newX, newZ, allBoxes) {
             let bestTarget = null;
-            let bestDist = 0.6;
+            let bestDist = 0.8;
             let bestPos = { x: newX, z: newZ, y: 0 };
             
             for (let target of allBoxes) {
@@ -1685,8 +1623,8 @@
                     if (raycaster.ray.intersectPlane(dragPlane, inter)) {
                         let newX = inter.x - dragOffset.x;
                         let newZ = inter.z - dragOffset.z;
-                        newX = Math.min(12, Math.max(-12, newX));
-                        newZ = Math.min(10, Math.max(-10, newZ));
+                        newX = Math.min(15, Math.max(-15, newX));
+                        newZ = Math.min(12, Math.max(-12, newZ));
                         
                         const snapResult = findBestSnapPosition(dragTarget, newX, newZ, boxes);
                         let targetY = snapResult.y;
@@ -1795,7 +1733,7 @@
         }
 
         function arrangeAll() {
-            const spacing = 2.6;
+            const spacing = 3.0;
             const cols = Math.ceil(Math.sqrt(boxes.length));
             boxes.forEach((b, i) => {
                 const row = Math.floor(i / cols);
@@ -1829,8 +1767,8 @@
         }
 
         // UI绑定
-        document.getElementById('addBoxBtn').onclick = () => addBox(null, 1.0, 0.8, 0.6, null, null, 0);
-        document.getElementById('addCubeBtn').onclick = () => addBox(null, 0.8, 0.8, 0.8, null, null, 0);
+        document.getElementById('addBoxBtn').onclick = () => addBox(null, 2.0, 1.5, 1.2, null, null, 0);
+        document.getElementById('addCubeBtn').onclick = () => addBox(null, 1.5, 1.5, 1.5, null, null, 0);
         document.getElementById('optimizeBtn').onclick = optimizeAll;
         document.getElementById('arrangeBtn').onclick = arrangeAll;
         document.getElementById('clearBtn').onclick = clearAll;
@@ -1895,11 +1833,11 @@
         setMoveMode(false);
         animate();
 
-        // 演示示例
+        // 演示示例（初始尺寸调大）
         setTimeout(() => {
-            addBox('演示盒1', 1.0, 0.8, 0.65, -3, -2, 0);
-            addBox('演示盒2', 0.85, 0.85, 0.85, 0, 0, 0);
-            addBox('演示盒3', 1.1, 0.7, 0.55, 3, 2, 0);
+            addBox('演示盒1', 2.0, 1.5, 1.2, -4, -3, 0);
+            addBox('演示盒2', 1.8, 1.8, 1.8, 0, 0, 0);
+            addBox('演示盒3', 2.2, 1.4, 1.1, 4.5, 3, 0);
         }, 100);
 
         window.addEventListener('resize', () => {
