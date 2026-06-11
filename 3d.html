@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>3D包装设计专业版</title>
+    <title>3D包装设计专业版 | LX工作室</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
             overflow: hidden;
             background: #0a0a1a;
         }
@@ -24,12 +24,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a2a, #1a1a4a);
+            background: radial-gradient(ellipse at center, #0f0f2a 0%, #050510 100%);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.8s ease;
         }
         .start-screen.fade-out {
             opacity: 0;
@@ -37,77 +37,111 @@
         }
         .start-card {
             text-align: center;
-            animation: float 2s ease-in-out infinite;
+            animation: floatGlow 3s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 20px rgba(59,130,246,0.3)); }
+            50% { transform: translateY(-20px); filter: drop-shadow(0 0 40px rgba(59,130,246,0.6)); }
         }
-        .start-icon { font-size: 80px; margin-bottom: 20px; }
-        .start-title { font-size: 36px; font-weight: 600; color: white; margin-bottom: 10px; }
-        .start-sub { font-size: 14px; color: #94a3b8; margin-bottom: 30px; }
+        .start-icon { font-size: 100px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(59,130,246,0.5)); }
+        .start-title { font-size: 42px; font-weight: 700; background: linear-gradient(135deg, #ffffff, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
+        .start-sub { font-size: 16px; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; }
+        .start-studio { font-size: 13px; color: #6366f1; margin-bottom: 30px; letter-spacing: 2px; font-weight: 500; }
+        
+        /* 按钮组容器 */
+        .start-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
         .start-btn {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             border: none;
-            padding: 12px 40px;
+            padding: 14px 32px;
             font-size: 16px;
             font-weight: 600;
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(59,130,246,0.4);
         }
-        .start-btn:hover { background: #2563eb; transform: scale(1.02); }
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(59,130,246,0.6);
+        }
+        .start-link-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(16,185,129,0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .start-link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(16,185,129,0.6);
+        }
 
         /* 主界面 */
         .main-app {
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.8s ease;
         }
         .main-app.visible { opacity: 1; }
 
         /* 顶部栏 */
         .top-bar {
             position: absolute;
-            top: 16px;
-            left: 16px;
-            right: 16px;
+            top: 20px;
+            left: 20px;
+            right: 20px;
             z-index: 200;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         .stats-box {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(12px);
-            padding: 8px 20px;
-            border-radius: 40px;
+            background: rgba(10, 20, 40, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 10px 24px;
+            border-radius: 50px;
             display: flex;
-            gap: 24px;
-            border: 1px solid rgba(255,255,255,0.1);
+            gap: 28px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .stat {
             color: #94a3b8;
             font-size: 13px;
+            font-weight: 500;
         }
         .stat span {
             color: #4ade80;
             font-weight: 700;
-            font-size: 18px;
-            margin-left: 6px;
+            font-size: 20px;
+            margin-left: 8px;
+            text-shadow: 0 0 10px rgba(74,222,128,0.3);
         }
         .action-buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         .action-btn {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 8px 18px;
-            border-radius: 40px;
+            background: rgba(10, 20, 40, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
             color: #cbd5e1;
             font-size: 13px;
             font-weight: 500;
@@ -117,108 +151,136 @@
         .action-btn:hover {
             background: #3b82f6;
             color: white;
+            transform: translateY(-2px);
         }
 
         /* 底部模式栏 */
         .mode-bar {
             position: absolute;
-            bottom: 24px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 200;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(16px);
-            padding: 6px 20px;
-            border-radius: 50px;
+            background: rgba(10, 20, 40, 0.8);
+            backdrop-filter: blur(24px);
+            padding: 8px 28px;
+            border-radius: 60px;
             display: flex;
-            gap: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
+            gap: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .mode-btn {
-            padding: 10px 32px;
-            border-radius: 40px;
+            padding: 10px 36px;
+            border-radius: 50px;
             border: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             transition: all 0.2s;
         }
         .mode-btn.rotate {
-            background: rgba(59,130,246,0.3);
+            background: rgba(59,130,246,0.2);
             color: #93c5fd;
+            border: 1px solid rgba(59,130,246,0.3);
         }
         .mode-btn.move {
-            background: rgba(245,158,11,0.3);
+            background: rgba(245,158,11,0.2);
             color: #fcd34d;
+            border: 1px solid rgba(245,158,11,0.3);
         }
         .mode-btn.active {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(59,130,246,0.4);
         }
         .mode-btn.move.active {
-            background: #f59e0b;
-            color: #1a1a2e;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            box-shadow: 0 4px 15px rgba(245,158,11,0.4);
         }
 
         /* 右侧面板 */
         .side-panel {
             position: absolute;
             top: 80px;
-            right: 16px;
+            right: 20px;
             width: 400px;
             max-height: calc(100vh - 100px);
             overflow-y: auto;
-            background: rgba(15, 25, 45, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 18px;
+            background: rgba(15, 25, 45, 0.9);
+            backdrop-filter: blur(24px);
+            border-radius: 28px;
+            padding: 20px;
             z-index: 100;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             transition: transform 0.3s;
         }
         .side-panel.hidden {
             transform: translateX(420px);
         }
 
-        .panel-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .panel-title {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #a5f3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .studio-badge {
+            font-size: 10px;
+            color: #6366f1;
+            background: rgba(99,102,241,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
         }
 
         /* 材质区域 */
         .material-section {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         .section-label {
             font-size: 12px;
             color: #94a3b8;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
         .material-list {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .material-item {
             background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 16px;
-            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 7px 18px;
+            border-radius: 40px;
             font-size: 12px;
             cursor: pointer;
             color: #cbd5e1;
             transition: all 0.2s;
+            font-weight: 500;
         }
         .material-item:hover {
             background: rgba(59,130,246,0.3);
+            transform: translateY(-2px);
         }
         .material-item.active {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(59,130,246,0.3);
         }
 
         /* 添加按钮 */
@@ -229,37 +291,40 @@
         }
         .add-btn {
             flex: 1;
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             border: none;
-            padding: 10px;
-            border-radius: 40px;
+            padding: 12px;
+            border-radius: 50px;
             color: white;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 2px 10px rgba(59,130,246,0.2);
         }
         .add-btn:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59,130,246,0.4);
         }
 
         /* 盒子列表 */
         .box-list {
-            max-height: 300px;
+            max-height: 240px;
             overflow-y: auto;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .box-item {
             background: rgba(255,255,255,0.06);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 12px;
-            margin-bottom: 8px;
-            border: 1px solid transparent;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.2s;
         }
         .box-item.selected {
             background: rgba(59,130,246,0.2);
             border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59,130,246,0.2);
         }
         .box-header {
             display: flex;
@@ -270,19 +335,20 @@
         .box-name {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             flex: 1;
         }
         .box-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px currentColor;
         }
         .box-name-input {
             background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 25px;
+            padding: 5px 12px;
             color: white;
             font-size: 12px;
             font-weight: 500;
@@ -294,13 +360,14 @@
             border-color: #3b82f6;
         }
         .box-delete {
-            background: rgba(239,68,68,0.3);
+            background: rgba(239,68,68,0.25);
             border: none;
-            padding: 4px 14px;
+            padding: 5px 16px;
             border-radius: 30px;
             color: #f87171;
             font-size: 11px;
             cursor: pointer;
+            transition: all 0.2s;
         }
         .box-delete:hover {
             background: #ef4444;
@@ -322,6 +389,7 @@
             color: #94a3b8;
             display: block;
             margin-bottom: 6px;
+            font-weight: 500;
         }
         .slider-group input[type="range"] {
             width: 100%;
@@ -339,52 +407,54 @@
             border-radius: 50%;
             background: #fbbf24;
             cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            box-shadow: 0 0 8px rgba(251,191,36,0.5);
+            transition: transform 0.1s;
+        }
+        .slider-group input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
         }
         .size-input {
             width: 55px;
             background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 4px 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 25px;
+            padding: 4px 8px;
             color: #4ade80;
             font-size: 10px;
             text-align: center;
-            margin-top: 4px;
+            margin-top: 5px;
             font-family: monospace;
-        }
-        .size-input:focus {
-            outline: none;
-            border-color: #fbbf24;
         }
 
         /* 统计卡片 */
         .stats-card {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 14px;
-            margin-bottom: 16px;
+            background: rgba(0,0,0,0.35);
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         .stats-row {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .stats-label {
             font-size: 12px;
             color: #94a3b8;
         }
         .stats-number {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: #4ade80;
             font-family: monospace;
+            text-shadow: 0 0 8px rgba(74,222,128,0.3);
         }
         .stats-divider {
             height: 1px;
-            background: rgba(255,255,255,0.1);
-            margin: 12px 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            margin: 14px 0;
         }
         .total-area {
             display: flex;
@@ -397,21 +467,166 @@
             font-weight: 500;
         }
         .total-area-value {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: #fbbf24;
             font-family: monospace;
+            text-shadow: 0 0 8px rgba(251,191,36,0.3);
+        }
+
+        /* 包装结果卡片 */
+        .result-card {
+            background: rgba(0,0,0,0.35);
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 18px;
+            transition: all 0.3s;
+        }
+        .result-card.no-waste {
+            border: 2px solid #4ade80;
+        }
+        .result-card.has-waste {
+            border: 2px solid #c0392b;
+            animation: wasteBlink 0.5s ease-in-out 3;
+        }
+        @keyframes wasteBlink {
+            0%, 100% { border-color: #c0392b; box-shadow: 0 0 0 rgba(192,57,43,0); }
+            50% { border-color: #ff6b6b; box-shadow: 0 0 15px rgba(192,57,43,0.5); }
+        }
+        .result-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .result-title.no-waste {
+            color: #4ade80;
+        }
+        .result-title.has-waste {
+            color: #c0392b;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .result-label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .result-value {
+            font-size: 16px;
+            font-weight: 700;
+            font-family: monospace;
+        }
+        .result-value.no-waste {
+            color: #4ade80;
+        }
+        .result-value.has-waste {
+            color: #c0392b;
+        }
+        .result-sub {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255,255,255,0.15);
+        }
+        .result-sub-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+        .waste-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .waste-value.no-waste {
+            color: #4ade80;
+        }
+        .waste-value.has-waste {
+            color: #c0392b;
+        }
+        .waste-status {
+            font-size: 11px;
+            margin-top: 8px;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+        .waste-status.no-waste {
+            background: rgba(74,222,128,0.2);
+            color: #4ade80;
+        }
+        .waste-status.has-waste {
+            background: rgba(192,57,43,0.2);
+            color: #c0392b;
+        }
+
+        /* 堆叠方式卡片 */
+        .stack-card {
+            background: rgba(0,0,0,0.35);
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 1px solid #b8860b33;
+        }
+        .stack-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .stack-label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .stack-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fbbf24;
+            font-family: monospace;
+        }
+
+        /* 隐藏标签按钮 */
+        .toggle-label-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            width: 100%;
+            justify-content: center;
+        }
+        .toggle-label-btn:hover {
+            background: #3b82f6;
+            color: white;
+        }
+        .toggle-label-btn.active {
+            background: #f59e0b;
+            color: #1a1a2e;
+            border-color: #f59e0b;
         }
 
         /* 底部按钮组 */
         .bottom-buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         .bottom-btn {
             flex: 1;
-            padding: 10px;
-            border-radius: 40px;
+            padding: 12px;
+            border-radius: 50px;
             border: none;
             font-size: 12px;
             font-weight: 600;
@@ -419,31 +634,35 @@
             transition: all 0.2s;
         }
         .btn-blue {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             color: white;
+            box-shadow: 0 2px 10px rgba(59,130,246,0.2);
         }
         .btn-blue:hover {
-            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59,130,246,0.4);
         }
         .btn-gray {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             color: #cbd5e1;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.12);
         }
         .btn-gray:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
         }
         .btn-red {
             background: rgba(239,68,68,0.2);
             color: #f87171;
-            border: 1px solid rgba(239,68,68,0.3);
+            border: 1px solid rgba(239,68,68,0.25);
         }
         .btn-red:hover {
             background: #ef4444;
             color: white;
+            transform: translateY(-2px);
         }
 
-        /* 隐藏面板按钮 - 显眼金色 */
+        /* 隐藏面板按钮 */
         .toggle-panel {
             position: absolute;
             top: 80px;
@@ -451,54 +670,80 @@
             z-index: 101;
             background: linear-gradient(135deg, #f59e0b, #ef4444);
             backdrop-filter: blur(12px);
-            border: 2px solid rgba(255,255,255,0.3);
-            width: 44px;
-            height: 44px;
-            border-radius: 44px;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 46px;
+            height: 46px;
+            border-radius: 46px;
             font-size: 22px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.3s;
             color: white;
             font-weight: bold;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(245,158,11,0.3);
         }
         .toggle-panel:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(90deg);
             background: linear-gradient(135deg, #fbbf24, #f97316);
         }
 
         .toast {
             position: fixed;
-            bottom: 100px;
+            bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e293b;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
             color: #4ade80;
-            padding: 10px 24px;
-            border-radius: 40px;
+            padding: 12px 28px;
+            border-radius: 50px;
             font-size: 13px;
+            font-weight: 500;
             z-index: 300;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s;
             pointer-events: none;
+            border: 1px solid rgba(74,222,128,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .toast.show {
             opacity: 1;
         }
 
+        /* 烟花画布 */
+        .fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.05);
-            border-radius: 4px;
+            border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #f59e0b;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border-radius: 10px;
+        }
+
+        .studio-watermark {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            font-size: 11px;
+            color: rgba(100, 100, 150, 0.5);
+            letter-spacing: 1px;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -506,10 +751,14 @@
     <!-- 开始界面 -->
     <div class="start-screen" id="startScreen">
         <div class="start-card">
-            <div class="start-icon">📦</div>
+            <div class="start-icon">📦✨</div>
             <div class="start-title">3D包装设计专业版</div>
-            <div class="start-sub">智能贴合 · 自动扣面 · 滑块调节</div>
-            <button class="start-btn" id="startBtn">开始设计 →</button>
+            <div class="start-sub">智能贴合 · 自动扣面 · 光影渲染</div>
+            <div class="start-studio">LX STUDIO</div>
+            <div class="start-buttons">
+                <button class="start-btn" id="startBtn">开始设计 →</button>
+                <a href="https://r6hyfqd52k.coze.site" target="_blank" rel="noopener noreferrer" class="start-link-btn">🔗 进入计算器</a>
+            </div>
         </div>
     </div>
 
@@ -536,10 +785,13 @@
         <div class="toggle-panel" id="togglePanelBtn">📋</div>
 
         <div class="side-panel" id="sidePanel">
-            <div class="panel-title">📦 包装设计</div>
+            <div class="panel-header">
+                <div class="panel-title">包装设计</div>
+                <div class="studio-badge">LX STUDIO</div>
+            </div>
 
             <div class="material-section">
-                <div class="section-label">🎨 材质</div>
+                <div class="section-label">🎨 材质库</div>
                 <div class="material-list" id="materialList">
                     <div class="material-item active" data-mat="cardboard">瓦楞纸</div>
                     <div class="material-item" data-mat="wood">实木</div>
@@ -548,6 +800,10 @@
                     <div class="material-item" data-mat="glass">玻璃</div>
                 </div>
             </div>
+
+            <button class="toggle-label-btn" id="toggleLabelBtn">
+                <span>🏷️</span> 隐藏盒子标签
+            </button>
 
             <div class="add-buttons">
                 <button class="add-btn" id="addBoxBtn">➕ 添加盒子</button>
@@ -580,6 +836,46 @@
                 </div>
             </div>
 
+            <div class="result-card" id="resultCard">
+                <div class="result-title" id="resultTitle">
+                    <span>📊</span> 包装结果
+                </div>
+                <div class="result-item">
+                    <span class="result-label">方盒总表面积</span>
+                    <span class="result-value" id="boxSurfaceArea">0.00</span>
+                </div>
+                <div class="result-sub">
+                    <div class="result-sub-item">
+                        <span class="result-label">方盒总体积</span>
+                        <span class="result-value" id="boxVolume">0.00</span>
+                    </div>
+                    <div class="result-sub-item">
+                        <span class="result-label">物体总体积</span>
+                        <span class="result-value" id="objectsVolume">0.00</span>
+                    </div>
+                    <div class="result-sub-item" style="margin-top: 8px;">
+                        <span class="result-label">浪费空间</span>
+                        <span class="waste-value" id="wasteSpace">0.00 (0%)</span>
+                    </div>
+                </div>
+                <div class="waste-status" id="wasteStatus">✨ 无浪费，完美贴合！</div>
+            </div>
+
+            <div class="stack-card" id="stackCard">
+                <div class="stack-item">
+                    <span class="stack-label">📐 堆叠方式</span>
+                    <span class="stack-value" id="stackLayout">1 × 1 × 1</span>
+                </div>
+                <div class="stack-item">
+                    <span class="stack-label">📦 方盒尺寸</span>
+                    <span class="stack-value" id="boxSize">-</span>
+                </div>
+                <div class="stack-item">
+                    <span class="stack-label">📏 单体体积</span>
+                    <span class="stack-value" id="unitVolume">-</span>
+                </div>
+            </div>
+
             <div class="bottom-buttons">
                 <button class="bottom-btn btn-blue" id="optimizeBtn">⚡ 立方体优化</button>
                 <button class="bottom-btn btn-gray" id="arrangeBtn">📐 自动排列</button>
@@ -588,7 +884,9 @@
         </div>
     </div>
 
+    <div class="studio-watermark">LX STUDIO · 智能包装设计系统</div>
     <div id="toast" class="toast"></div>
+    <canvas id="fireworksCanvas" class="fireworks-canvas"></canvas>
 
     <script type="importmap">
         {
@@ -604,27 +902,157 @@
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
+        // ========== 烟花特效系统 ==========
+        const fireworksCanvas = document.getElementById('fireworksCanvas');
+        let fireworksCtx = fireworksCanvas.getContext('2d');
+        let particles = [];
+        let fireworksAnimationId = null;
+        let lastWasteState = null;
+        
+        function resizeFireworksCanvas() {
+            fireworksCanvas.width = window.innerWidth;
+            fireworksCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeFireworksCanvas);
+        resizeFireworksCanvas();
+        
+        class Particle {
+            constructor(x, y, vx, vy, color, size) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.color = color;
+                this.size = size;
+                this.gravity = 0.2;
+                this.alpha = 1;
+                this.decay = 0.02;
+            }
+            
+            update() {
+                this.vx *= 0.98;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+                return this.alpha > 0;
+            }
+            
+            draw(ctx) {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#ffaa00', '#ffff00', '#00ff00', '#00aaff', '#ff00ff', '#ffffff'];
+            const particleCount = 60 + Math.floor(Math.random() * 40);
+            for (let i = 0; i < particleCount; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2 + Math.random() * 5;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = 2 + Math.random() * 3;
+                particles.push(new Particle(x, y, vx, vy, color, size));
+            }
+        }
+        
+        function startFireworks() {
+            if (fireworksAnimationId) cancelAnimationFrame(fireworksAnimationId);
+            
+            // 清除旧粒子
+            particles = [];
+            
+            // 创建多个烟花
+            const centerX = fireworksCanvas.width / 2;
+            const centerY = fireworksCanvas.height / 2;
+            
+            // 连续发射多个烟花
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const offsetX = (Math.random() - 0.5) * 200;
+                    const offsetY = (Math.random() - 0.5) * 150;
+                    createFirework(centerX + offsetX, centerY + offsetY);
+                }, i * 150);
+            }
+            
+            // 再补一轮
+            setTimeout(() => {
+                for (let i = 0; i < 6; i++) {
+                    setTimeout(() => {
+                        const offsetX = (Math.random() - 0.5) * 250;
+                        const offsetY = (Math.random() - 0.5) * 180;
+                        createFirework(centerX + offsetX, centerY + offsetY);
+                    }, i * 120);
+                }
+            }, 600);
+            
+            function animateFireworks() {
+                fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+                
+                let hasActive = false;
+                for (let i = 0; i < particles.length; i++) {
+                    const active = particles[i].update();
+                    if (active) {
+                        particles[i].draw(fireworksCtx);
+                        hasActive = true;
+                    } else {
+                        particles.splice(i, 1);
+                        i--;
+                    }
+                }
+                
+                if (hasActive) {
+                    fireworksAnimationId = requestAnimationFrame(animateFireworks);
+                } else {
+                    fireworksAnimationId = null;
+                    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+                }
+            }
+            
+            animateFireworks();
+        }
+        
+        // 闪烁警告动画
+        let blinkTimeout = null;
+        function triggerWasteBlink() {
+            const resultCard = document.getElementById('resultCard');
+            if (resultCard) {
+                resultCard.classList.add('has-waste');
+                if (blinkTimeout) clearTimeout(blinkTimeout);
+                blinkTimeout = setTimeout(() => {
+                    if (resultCard) resultCard.classList.remove('has-waste');
+                }, 1500);
+            }
+        }
+        
         // 材质库
         const materials = {
-            cardboard: new THREE.MeshStandardMaterial({ color: 0xc49a6c, roughness: 0.65, metalness: 0.05 }),
-            wood: new THREE.MeshStandardMaterial({ color: 0x9b6e3e, roughness: 0.55, metalness: 0.04 }),
-            plastic: new THREE.MeshStandardMaterial({ color: 0x5a9bd5, roughness: 0.35, metalness: 0.12 }),
-            metal: new THREE.MeshStandardMaterial({ color: 0xaabbcc, roughness: 0.25, metalness: 0.85 }),
-            glass: new THREE.MeshStandardMaterial({ color: 0x88bbee, roughness: 0.15, metalness: 0.9, transparent: true, opacity: 0.8 })
+            cardboard: new THREE.MeshStandardMaterial({ color: 0xc49a6c, roughness: 0.55, metalness: 0.08, emissive: 0x331a00, emissiveIntensity: 0.05 }),
+            wood: new THREE.MeshStandardMaterial({ color: 0x9b6e3e, roughness: 0.45, metalness: 0.05, emissive: 0x331a00, emissiveIntensity: 0.04 }),
+            plastic: new THREE.MeshStandardMaterial({ color: 0x5a9bd5, roughness: 0.28, metalness: 0.18, emissive: 0x001a44, emissiveIntensity: 0.06 }),
+            metal: new THREE.MeshStandardMaterial({ color: 0xaabbcc, roughness: 0.22, metalness: 0.92, emissive: 0x111122, emissiveIntensity: 0.05 }),
+            glass: new THREE.MeshStandardMaterial({ color: 0x88bbee, roughness: 0.12, metalness: 0.94, transparent: true, opacity: 0.75, emissive: 0x004466, emissiveIntensity: 0.04 })
         };
         let currentMat = 'cardboard';
 
         // 场景设置
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x050510);
-        scene.fog = new THREE.FogExp2(0x050510, 0.003);
+        scene.fog = new THREE.FogExp2(0x050510, 0.002);
 
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-        camera.position.set(10, 8, 12);
+        const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 3000);
+        camera.position.set(14, 10, 16);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.setPixelRatio(window.devicePixelRatio);
         document.body.appendChild(renderer.domElement);
 
         const labelRenderer = new CSS2DRenderer();
@@ -637,55 +1065,89 @@
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.08;
-        controls.zoomSpeed = 1.2;
-        controls.panSpeed = 0.8;
-        controls.target.set(0, 0.6, 0);
+        controls.dampingFactor = 0.06;
+        controls.zoomSpeed = 1.5;
+        controls.panSpeed = 1.0;
+        controls.rotateSpeed = 1.0;
+        controls.target.set(0, 0.8, 0);
 
-        // 灯光
-        const ambient = new THREE.AmbientLight(0x2a2a4a);
-        scene.add(ambient);
-        const mainLight = new THREE.DirectionalLight(0xfff5e0, 1.2);
-        mainLight.position.set(5, 10, 4);
+        // ========== 光影系统 ==========
+        const ambientLight = new THREE.AmbientLight(0x2a2a4a, 0.55);
+        scene.add(ambientLight);
+        
+        const mainLight = new THREE.DirectionalLight(0xfff5e0, 1.4);
+        mainLight.position.set(6, 14, 5);
         mainLight.castShadow = true;
+        mainLight.shadow.mapSize.width = 2048;
+        mainLight.shadow.mapSize.height = 2048;
         scene.add(mainLight);
-        const fillLight = new THREE.PointLight(0x4488ff, 0.4);
-        fillLight.position.set(2, 3, 3);
-        scene.add(fillLight);
-        const backLight = new THREE.PointLight(0xffaa66, 0.4);
-        backLight.position.set(-2, 3, -4);
-        scene.add(backLight);
+        
+        const mainFill = new THREE.PointLight(0xffaa77, 0.6);
+        mainFill.position.set(4, 6, 5);
+        scene.add(mainFill);
+        
+        const warmBack = new THREE.PointLight(0xff8866, 0.6);
+        warmBack.position.set(-4, 5, -6);
+        scene.add(warmBack);
+        
+        const coolFill = new THREE.PointLight(0x4488ff, 0.55);
+        coolFill.position.set(5, 4, 4);
+        scene.add(coolFill);
+        
+        const topFill = new THREE.PointLight(0x88aaff, 0.45);
+        topFill.position.set(0, 9, 0);
+        scene.add(topFill);
+        
+        const bottomFill = new THREE.PointLight(0x4466aa, 0.4);
+        bottomFill.position.set(0, -2, 0);
+        scene.add(bottomFill);
+        
+        const rotatingLight = new THREE.PointLight(0x66ccff, 0.45);
+        rotatingLight.position.set(4, 3, 4);
+        scene.add(rotatingLight);
 
-        // 地面网格
-        const grid = new THREE.GridHelper(20, 20, 0x4a6eff, 0x2a3ecc);
-        grid.position.y = -0.4;
-        grid.material.transparent = true;
-        grid.material.opacity = 0.3;
-        scene.add(grid);
+        // 地面
+        const gridHelper = new THREE.GridHelper(28, 28, 0x4a6eff, 0x2a3ecc);
+        gridHelper.position.y = -0.5;
+        gridHelper.material.transparent = true;
+        gridHelper.material.opacity = 0.3;
+        scene.add(gridHelper);
+        
+        const groundPlane = new THREE.Mesh(
+            new THREE.PlaneGeometry(24, 24),
+            new THREE.MeshStandardMaterial({ color: 0x0a0a2a, roughness: 0.28, metalness: 0.78, transparent: true, opacity: 0.2 })
+        );
+        groundPlane.rotation.x = -Math.PI / 2;
+        groundPlane.position.y = -0.5;
+        groundPlane.receiveShadow = true;
+        scene.add(groundPlane);
 
-        // 星空背景
+        // 星空
         const starGeo = new THREE.BufferGeometry();
-        const starPos = new Float32Array(2000 * 3);
-        for (let i = 0; i < 2000; i++) {
-            starPos[i*3] = (Math.random() - 0.5) * 300;
-            starPos[i*3+1] = (Math.random() - 0.5) * 120;
-            starPos[i*3+2] = (Math.random() - 0.5) * 150 - 70;
+        const starPos = new Float32Array(3000 * 3);
+        for (let i = 0; i < 3000; i++) {
+            starPos[i*3] = (Math.random() - 0.5) * 450;
+            starPos[i*3+1] = (Math.random() - 0.5) * 180;
+            starPos[i*3+2] = (Math.random() - 0.5) * 250 - 100;
         }
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xaaccff, size: 0.06, transparent: true, opacity: 0.5 }));
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xaaccff, size: 0.08, transparent: true, opacity: 0.6 }));
         scene.add(stars);
 
-        // 吸附高亮框
+        // 吸附高亮
         let snapHighlight = null;
         function createHighlight() {
             const geom = new THREE.BoxGeometry(1, 1, 1);
-            const mat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.4 });
+            const mat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.45 });
             const hl = new THREE.Mesh(geom, mat);
             scene.add(hl);
             return hl;
         }
         snapHighlight = createHighlight();
         snapHighlight.visible = false;
+
+        // 标签显示状态
+        let labelsVisible = true;
 
         // 盒子数据
         let boxes = [];
@@ -694,10 +1156,28 @@
         const colorList = [0x3b82f6, 0xef4444, 0x10b981, 0xf59e0b, 0x8b5cf6, 0xec4899, 0x06b6d4];
 
         function getColor(i) { return colorList[i % colorList.length]; }
+        function getBoxTopY(box) { return box.y + box.h; }
 
-        // 获取盒子顶部Y坐标
-        function getBoxTopY(box) {
-            return box.y + box.h;
+        // 计算包围盒
+        function getBoundingBox() {
+            if (boxes.length === 0) return { minX: 0, maxX: 0, minY: 0, maxY: 0, minZ: 0, maxZ: 0, width: 0, height: 0, depth: 0 };
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+            boxes.forEach(b => {
+                minX = Math.min(minX, b.x - b.l/2);
+                maxX = Math.max(maxX, b.x + b.l/2);
+                minY = Math.min(minY, b.y);
+                maxY = Math.max(maxY, b.y + b.h);
+                minZ = Math.min(minZ, b.z - b.w/2);
+                maxZ = Math.max(maxZ, b.z + b.w/2);
+            });
+            return { minX, maxX, minY, maxY, minZ, maxZ, width: maxX - minX, height: maxY - minY, depth: maxZ - minZ };
+        }
+
+        // 检测重叠
+        function checkOverlap(box1, box2) {
+            const overlapX = (box1.l/2 + box2.l/2) - Math.abs(box1.x - box2.x);
+            const overlapZ = (box1.w/2 + box2.w/2) - Math.abs(box1.z - box2.z);
+            return overlapX > 0.05 && overlapZ > 0.05;
         }
 
         // 统计数据计算
@@ -710,69 +1190,83 @@
                 totalDiagonal += Math.sqrt(b.l*b.l + b.w*b.w + b.h*b.h);
             });
             
-            // 扣除所有贴合面
+            // 扣除贴合面
             for (let i = 0; i < boxes.length; i++) {
                 for (let j = i + 1; j < boxes.length; j++) {
                     const a = boxes[i], b = boxes[j];
-                    
-                    // 检查是否在XZ平面上重叠（上下堆叠）
                     const overlapX = (a.l/2 + b.l/2) - Math.abs(a.x - b.x);
                     const overlapZ = (a.w/2 + b.w/2) - Math.abs(a.z - b.z);
-                    
                     if (overlapX > 0.05 && overlapZ > 0.05) {
-                        // 上下堆叠：检查谁在上面
                         if (Math.abs(getBoxTopY(a) - b.y) < 0.1) {
-                            const contactArea = Math.min(a.l, b.l) * Math.min(a.w, b.w);
-                            totalArea -= contactArea;
+                            totalArea -= Math.min(a.l, b.l) * Math.min(a.w, b.w);
                         } else if (Math.abs(getBoxTopY(b) - a.y) < 0.1) {
-                            const contactArea = Math.min(a.l, b.l) * Math.min(a.w, b.w);
-                            totalArea -= contactArea;
+                            totalArea -= Math.min(a.l, b.l) * Math.min(a.w, b.w);
                         }
                     } else {
-                        // 并排贴合
                         const dx = Math.abs(a.x - b.x);
                         const dz = Math.abs(a.z - b.z);
-                        
                         if (Math.abs(dx - (a.l/2 + b.l/2)) < 0.1 && Math.abs(a.z - b.z) < (a.w/2 + b.w/2) - 0.05) {
-                            const contactH = Math.min(a.h, b.h);
-                            const contactW = Math.min(a.w, b.w);
-                            totalArea -= contactH * contactW;
+                            totalArea -= Math.min(a.h, b.h) * Math.min(a.w, b.w);
                         }
                         else if (Math.abs(dz - (a.w/2 + b.w/2)) < 0.1 && Math.abs(a.x - b.x) < (a.l/2 + b.l/2) - 0.05) {
-                            const contactH = Math.min(a.h, b.h);
-                            const contactL = Math.min(a.l, b.l);
-                            totalArea -= contactH * contactL;
+                            totalArea -= Math.min(a.h, b.h) * Math.min(a.l, b.l);
                         }
                     }
                 }
             }
             
-            return { totalArea: Math.max(0, totalArea), totalVolume, totalPerimeter, totalDiagonal };
+            const bbox = getBoundingBox();
+            const boxSurfaceArea = 2 * (bbox.width * bbox.depth + bbox.width * bbox.height + bbox.depth * bbox.height);
+            const boxVolume = bbox.width * bbox.height * bbox.depth;
+            const objectsVolume = totalVolume;
+            const wasteSpace = boxVolume - objectsVolume;
+            const wastePercent = boxVolume > 0 ? (wasteSpace / boxVolume * 100) : 0;
+            
+            // 计算堆叠方式
+            const positions = boxes.map(b => ({ x: Math.round(b.x * 10) / 10, z: Math.round(b.z * 10) / 10, y: Math.round(b.y * 10) / 10 }));
+            const uniqueX = new Set(positions.map(p => p.x)).size;
+            const uniqueZ = new Set(positions.map(p => p.z)).size;
+            const uniqueY = new Set(positions.map(p => p.y)).size;
+            const layoutX = Math.max(uniqueX, 1);
+            const layoutZ = Math.max(uniqueZ, 1);
+            const layoutY = Math.max(uniqueY, 1);
+            
+            const unitVol = boxes.length > 0 ? (totalVolume / boxes.length) : 0;
+            
+            return { 
+                totalArea: Math.max(0, totalArea), totalVolume, totalPerimeter, totalDiagonal,
+                boxSurfaceArea, boxVolume, objectsVolume, wasteSpace, wastePercent,
+                layoutX, layoutY, layoutZ,
+                boxSize: { w: bbox.width.toFixed(2), h: bbox.height.toFixed(2), d: bbox.depth.toFixed(2) },
+                unitVolume: unitVol
+            };
         }
 
-        // 创建盒子模型
+        // 创建盒子
         function createBoxMesh(box) {
             const geom = new THREE.BoxGeometry(box.l, box.h, box.w);
             const mat = materials[currentMat].clone();
             mat.color.setHex(box.color);
             const mesh = new THREE.Mesh(geom, mat);
             mesh.castShadow = true;
+            mesh.receiveShadow = true;
             mesh.position.set(box.x, box.y + box.h/2, box.z);
+            
             const edges = new THREE.EdgesGeometry(geom);
             const wire = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffdd99 }));
             wire.position.copy(mesh.position);
+            
             return { mesh, wire };
         }
 
-        // 创建文字标签
         function createBoxLabel(box) {
             const div = document.createElement('div');
-            div.innerHTML = `<div style="background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); padding:4px 12px; border-radius:24px; border-left:3px solid #fbbf24; font-size:11px;">
+            div.innerHTML = `<div style="background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); padding:6px 16px; border-radius:30px; border-left:3px solid #fbbf24; font-size:12px; font-weight:500; box-shadow:0 4px 15px rgba(0,0,0,0.3);">
                 <span style="color:#fbbf24;">📦 ${box.name}</span>
                 <span style="color:#4ade80;"> ${box.l.toFixed(1)}×${box.w.toFixed(1)}×${box.h.toFixed(1)}</span>
             </div>`;
             const label = new CSS2DObject(div);
-            label.position.set(box.x, box.y + box.h + 0.55, box.z);
+            label.position.set(box.x, box.y + box.h + 0.6, box.z);
             return label;
         }
 
@@ -790,69 +1284,171 @@
             }
             if (box.label) {
                 scene.remove(box.label);
+                if (labelsVisible) {
+                    box.label = createBoxLabel(box);
+                    scene.add(box.label);
+                } else {
+                    box.label = null;
+                }
+            } else if (labelsVisible) {
                 box.label = createBoxLabel(box);
                 scene.add(box.label);
             }
         }
 
-        // 刷新界面
-        function refreshUI() {
-            const container = document.getElementById('boxList');
-            container.innerHTML = '';
-            boxes.forEach(b => {
-                const item = document.createElement('div');
-                item.className = `box-item ${selectedId === b.id ? 'selected' : ''}`;
-                item.onclick = (e) => {
-                    if (e.target.tagName === 'INPUT') return;
-                    selectedId = b.id; 
-                    refreshUI(); 
-                    if(b.mesh) controls.target.copy(b.mesh.position);
-                };
-                
-                item.innerHTML = `
-                    <div class="box-header">
-                        <div class="box-name">
-                            <div class="box-color" style="background:#${b.color.toString(16).padStart(6,'0')}"></div>
-                            <input type="text" class="box-name-input" value="${b.name}" 
-                                   onchange="window.updateBoxName(${b.id}, this.value)" 
-                                   onclick="event.stopPropagation()">
-                        </div>
-                        <button class="box-delete" onclick="event.stopPropagation(); window.deleteBox(${b.id})">删除</button>
-                    </div>
-                    <div class="box-sliders">
-                        <div class="slider-group">
-                            <label>长</label>
-                            <input type="range" min="0.3" max="2.5" step="0.01" value="${b.l}" 
-                                   oninput="window.updateSizeFromSlider(${b.id}, 'l', this.value)">
-                            <input type="number" class="size-input" value="${b.l.toFixed(2)}" step="0.05"
-                                   onchange="window.updateSizeFromInput(${b.id}, 'l', this.value)">
-                        </div>
-                        <div class="slider-group">
-                            <label>宽</label>
-                            <input type="range" min="0.3" max="2.5" step="0.01" value="${b.w}" 
-                                   oninput="window.updateSizeFromSlider(${b.id}, 'w', this.value)">
-                            <input type="number" class="size-input" value="${b.w.toFixed(2)}" step="0.05"
-                                   onchange="window.updateSizeFromInput(${b.id}, 'w', this.value)">
-                        </div>
-                        <div class="slider-group">
-                            <label>高</label>
-                            <input type="range" min="0.3" max="2.5" step="0.01" value="${b.h}" 
-                                   oninput="window.updateSizeFromSlider(${b.id}, 'h', this.value)">
-                            <input type="number" class="size-input" value="${b.h.toFixed(2)}" step="0.05"
-                                   onchange="window.updateSizeFromInput(${b.id}, 'h', this.value)">
-                        </div>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
+        // 切换标签
+        function toggleAllLabels() {
+            labelsVisible = !labelsVisible;
+            const toggleBtn = document.getElementById('toggleLabelBtn');
+            if (labelsVisible) {
+                toggleBtn.innerHTML = '<span>🏷️</span> 隐藏盒子标签';
+                toggleBtn.classList.remove('active');
+                showToast('标签已显示');
+            } else {
+                toggleBtn.innerHTML = '<span>🏷️</span> 显示盒子标签';
+                toggleBtn.classList.add('active');
+                showToast('标签已隐藏');
+            }
             
-            const stats = calcStats();
-            document.getElementById('statCount').innerHTML = boxes.length;
-            document.getElementById('statArea').innerHTML = stats.totalArea.toFixed(2);
-            document.getElementById('totalVolume').innerHTML = stats.totalVolume.toFixed(2);
-            document.getElementById('totalPerimeter').innerHTML = stats.totalPerimeter.toFixed(2);
-            document.getElementById('totalDiagonal').innerHTML = stats.totalDiagonal.toFixed(2);
-            document.getElementById('finalArea').innerHTML = stats.totalArea.toFixed(2);
+            boxes.forEach(box => {
+                if (box.label) {
+                    scene.remove(box.label);
+                    box.label = null;
+                }
+                if (labelsVisible) {
+                    box.label = createBoxLabel(box);
+                    scene.add(box.label);
+                }
+            });
+        }
+
+        // 更新浪费提示UI（新增烟花和闪烁触发）
+        let lastWastePercent = -1;
+        function updateWasteUI(wastePercent) {
+            const resultCard = document.getElementById('resultCard');
+            const resultTitle = document.getElementById('resultTitle');
+            const boxSurfaceAreaEl = document.getElementById('boxSurfaceArea');
+            const boxVolumeEl = document.getElementById('boxVolume');
+            const objectsVolumeEl = document.getElementById('objectsVolume');
+            const wasteSpaceEl = document.getElementById('wasteSpace');
+            const wasteStatusEl = document.getElementById('wasteStatus');
+            
+            const hasWaste = wastePercent > 0.01;
+            
+            // 检测状态变化
+            const wasPerfect = lastWastePercent !== -1 && lastWastePercent <= 0.01;
+            const isNowPerfect = !hasWaste;
+            
+            if (isNowPerfect && !wasPerfect && boxes.length > 0) {
+                // 从有浪费变成完美贴合 -> 放烟花
+                startFireworks();
+                showToast('🎉 完美贴合！放烟花庆祝！ 🎉');
+            } else if (hasWaste && lastWastePercent <= 0.01 && boxes.length > 0) {
+                // 从完美变成有浪费 -> 红色闪烁
+                triggerWasteBlink();
+                showToast('⚠️ 出现浪费空间，请优化堆叠方式');
+            } else if (hasWaste && wastePercent > lastWastePercent + 5 && boxes.length > 0) {
+                // 浪费增加超过5% -> 闪烁警告
+                triggerWasteBlink();
+            }
+            
+            lastWastePercent = wastePercent;
+            
+            if (hasWaste) {
+                resultCard.className = 'result-card has-waste';
+                resultTitle.className = 'result-title has-waste';
+                boxSurfaceAreaEl.className = 'result-value has-waste';
+                boxVolumeEl.className = 'result-value has-waste';
+                objectsVolumeEl.className = 'result-value has-waste';
+                wasteSpaceEl.className = 'waste-value has-waste';
+                wasteStatusEl.className = 'waste-status has-waste';
+                wasteStatusEl.innerHTML = `⚠️ 存在 ${wastePercent.toFixed(1)}% 的浪费空间，建议优化堆叠方式`;
+            } else {
+                resultCard.className = 'result-card no-waste';
+                resultTitle.className = 'result-title no-waste';
+                boxSurfaceAreaEl.className = 'result-value no-waste';
+                boxVolumeEl.className = 'result-value no-waste';
+                objectsVolumeEl.className = 'result-value no-waste';
+                wasteSpaceEl.className = 'waste-value no-waste';
+                wasteStatusEl.className = 'waste-status no-waste';
+                wasteStatusEl.innerHTML = '✨ 完美！无任何浪费空间 ✨';
+            }
+        }
+
+        // 刷新UI
+        let refreshTimeout = null;
+        function refreshUI() {
+            if (refreshTimeout) clearTimeout(refreshTimeout);
+            
+            refreshTimeout = setTimeout(() => {
+                const container = document.getElementById('boxList');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                boxes.forEach(b => {
+                    const item = document.createElement('div');
+                    item.className = `box-item ${selectedId === b.id ? 'selected' : ''}`;
+                    item.onclick = (e) => {
+                        if (e.target.tagName === 'INPUT') return;
+                        selectedId = b.id; 
+                        refreshUI(); 
+                        if(b.mesh) controls.target.copy(b.mesh.position);
+                    };
+                    
+                    item.innerHTML = `
+                        <div class="box-header">
+                            <div class="box-name">
+                                <div class="box-color" style="background:#${b.color.toString(16).padStart(6,'0')}; box-shadow:0 0 6px #${b.color.toString(16).padStart(6,'0')}"></div>
+                                <input type="text" class="box-name-input" value="${b.name}" 
+                                       onchange="window.updateBoxName(${b.id}, this.value)" 
+                                       onclick="event.stopPropagation()">
+                            </div>
+                            <button class="box-delete" onclick="event.stopPropagation(); window.deleteBox(${b.id})">删除</button>
+                        </div>
+                        <div class="box-sliders">
+                            <div class="slider-group">
+                                <label>长</label>
+                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.l}" 
+                                       oninput="window.updateSizeFromSlider(${b.id}, 'l', this.value)">
+                                <input type="number" class="size-input" value="${b.l.toFixed(2)}" step="0.05"
+                                       onchange="window.updateSizeFromInput(${b.id}, 'l', this.value)">
+                            </div>
+                            <div class="slider-group">
+                                <label>宽</label>
+                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.w}" 
+                                       oninput="window.updateSizeFromSlider(${b.id}, 'w', this.value)">
+                                <input type="number" class="size-input" value="${b.w.toFixed(2)}" step="0.05"
+                                       onchange="window.updateSizeFromInput(${b.id}, 'w', this.value)">
+                            </div>
+                            <div class="slider-group">
+                                <label>高</label>
+                                <input type="range" min="0.3" max="2.5" step="0.01" value="${b.h}" 
+                                       oninput="window.updateSizeFromSlider(${b.id}, 'h', this.value)">
+                                <input type="number" class="size-input" value="${b.h.toFixed(2)}" step="0.05"
+                                       onchange="window.updateSizeFromInput(${b.id}, 'h', this.value)">
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+                
+                const stats = calcStats();
+                document.getElementById('statCount').innerHTML = boxes.length;
+                document.getElementById('statArea').innerHTML = stats.totalArea.toFixed(2);
+                document.getElementById('totalVolume').innerHTML = stats.totalVolume.toFixed(2);
+                document.getElementById('totalPerimeter').innerHTML = stats.totalPerimeter.toFixed(2);
+                document.getElementById('totalDiagonal').innerHTML = stats.totalDiagonal.toFixed(2);
+                document.getElementById('finalArea').innerHTML = stats.totalArea.toFixed(2);
+                document.getElementById('boxSurfaceArea').innerHTML = stats.boxSurfaceArea.toFixed(2);
+                document.getElementById('boxVolume').innerHTML = stats.boxVolume.toFixed(2);
+                document.getElementById('objectsVolume').innerHTML = stats.objectsVolume.toFixed(2);
+                document.getElementById('wasteSpace').innerHTML = `${stats.wasteSpace.toFixed(2)} (${stats.wastePercent.toFixed(1)}%)`;
+                document.getElementById('stackLayout').innerHTML = `${stats.layoutX} × ${stats.layoutZ} × ${stats.layoutY}`;
+                document.getElementById('boxSize').innerHTML = `${stats.boxSize.w} × ${stats.boxSize.d} × ${stats.boxSize.h} m`;
+                document.getElementById('unitVolume').innerHTML = stats.unitVolume.toFixed(2) + ' m³';
+                
+                updateWasteUI(stats.wastePercent);
+            }, 10);
         }
 
         window.updateBoxName = (id, newName) => {
@@ -900,58 +1496,81 @@
         };
 
         function addBox(name, l, w, h, x, z, y) {
+            let newX = x !== undefined ? x : (Math.random() - 0.5) * 10;
+            let newZ = z !== undefined ? z : (Math.random() - 0.5) * 8;
+            let newY = y !== undefined ? y : 0;
+            
             const newBox = {
                 id: nextId++,
                 name: name || `盒子${nextId-1}`,
                 l: l || 1.0, w: w || 0.8, h: h || 0.6,
-                x: x !== undefined ? x : (Math.random() - 0.5) * 6,
-                z: z !== undefined ? z : (Math.random() - 0.5) * 5,
-                y: y !== undefined ? y : 0,
+                x: newX, z: newZ, y: newY,
                 color: getColor(boxes.length),
             };
+            
+            let hasOverlap = true;
+            let attempts = 0;
+            while (hasOverlap && attempts < 50) {
+                hasOverlap = false;
+                for (let other of boxes) {
+                    if (checkOverlap(newBox, other)) {
+                        hasOverlap = true;
+                        newBox.x = (Math.random() - 0.5) * 10;
+                        newBox.z = (Math.random() - 0.5) * 8;
+                        break;
+                    }
+                }
+                attempts++;
+            }
+            
             const { mesh, wire } = createBoxMesh(newBox);
-            const label = createBoxLabel(newBox);
+            const label = labelsVisible ? createBoxLabel(newBox) : null;
             newBox.mesh = mesh; newBox.wire = wire; newBox.label = label;
-            scene.add(mesh, wire, label);
+            scene.add(mesh, wire);
+            if (label) scene.add(label);
             boxes.push(newBox);
             refreshUI();
             return newBox;
         }
 
-        // ========== 优化后的拖拽移动系统 ==========
-        let dragTarget = null;
-        let isDragging = false;
-        let dragPlane = null;
-        let dragOffset = new THREE.Vector3();
-        let raycaster = new THREE.Raycaster();
-        let moveMode = false;
-        
-        // 吸附灵敏度参数
-        const SNAP_DISTANCE = 0.35;  // 吸附距离（米）- 稍微加大，更容易吸附
-        const STACK_OVERLAP = 0.08;   // 堆叠重叠阈值
+        // 找到指定位置下方最顶部的盒子
+        function findTopBoxAtPosition(x, z, excludeBox) {
+            let topBox = null;
+            let highestY = -Infinity;
+            
+            for (let box of boxes) {
+                if (excludeBox && box.id === excludeBox.id) continue;
+                const overlapX = (box.l/2 + 0.5) - Math.abs(x - box.x);
+                const overlapZ = (box.w/2 + 0.5) - Math.abs(z - box.z);
+                if (overlapX > 0.05 && overlapZ > 0.05) {
+                    const boxTop = box.y + box.h;
+                    if (boxTop > highestY) {
+                        highestY = boxTop;
+                        topBox = box;
+                    }
+                }
+            }
+            return topBox;
+        }
 
-        // 计算最佳吸附位置（并排吸附 + 上下堆叠）
+        // 堆叠吸附检测
         function findBestSnapPosition(dragged, newX, newZ, allBoxes) {
             let bestTarget = null;
-            let bestDist = SNAP_DISTANCE;
+            let bestDist = 0.6;
             let bestPos = { x: newX, z: newZ, y: 0 };
-            let isStack = false;
             
             for (let target of allBoxes) {
                 if (target.id === dragged.id) continue;
                 
-                // 计算各个方向的吸附位置
                 const positions = [
-                    { x: target.x - target.l/2 - dragged.l/2, z: target.z, desc: 'left', y: target.y },
-                    { x: target.x + target.l/2 + dragged.l/2, z: target.z, desc: 'right', y: target.y },
-                    { x: target.x, z: target.z - target.w/2 - dragged.w/2, desc: 'front', y: target.y },
-                    { x: target.x, z: target.z + target.w/2 + dragged.w/2, desc: 'back', y: target.y },
+                    { x: target.x - target.l/2 - dragged.l/2, z: target.z, y: target.y },
+                    { x: target.x + target.l/2 + dragged.l/2, z: target.z, y: target.y },
+                    { x: target.x, z: target.z - target.w/2 - dragged.w/2, y: target.y },
+                    { x: target.x, z: target.z + target.w/2 + dragged.w/2, y: target.y },
                 ];
                 
-                // 检查并排吸附
                 for (let pos of positions) {
                     const dist = Math.hypot(pos.x - newX, pos.z - newZ);
-                    // 检查Z轴或X轴对齐
                     const zAlign = Math.abs(pos.z - newZ) < (target.w/2 + dragged.w/2);
                     const xAlign = Math.abs(pos.x - newX) < (target.l/2 + dragged.l/2);
                     
@@ -959,38 +1578,69 @@
                         bestDist = dist;
                         bestTarget = target;
                         bestPos = { x: pos.x, z: pos.z, y: target.y };
-                        isStack = false;
                     }
                 }
                 
-                // 检查上下堆叠（XZ平面重叠）
                 const overlapX = (dragged.l/2 + target.l/2) - Math.abs(newX - target.x);
                 const overlapZ = (dragged.w/2 + target.w/2) - Math.abs(newZ - target.z);
                 
-                if (overlapX > STACK_OVERLAP && overlapZ > STACK_OVERLAP) {
-                    // 重叠了，应该堆叠在上面
-                    const targetTop = target.y + target.h;
-                    const distToCenter = Math.hypot(target.x - newX, target.z - newZ);
-                    if (distToCenter < bestDist) {
-                        bestDist = distToCenter;
-                        bestTarget = target;
-                        bestPos = { x: target.x, z: target.z, y: targetTop };
-                        isStack = true;
+                if (overlapX > 0.05 && overlapZ > 0.05) {
+                    const topBox = findTopBoxAtPosition(target.x, target.z, dragged);
+                    if (topBox) {
+                        const stackY = topBox.y + topBox.h;
+                        const distToCenter = Math.hypot(topBox.x - newX, topBox.z - newZ);
+                        if (distToCenter < bestDist) {
+                            bestDist = distToCenter;
+                            bestTarget = topBox;
+                            bestPos = { x: topBox.x, z: topBox.z, y: stackY };
+                        }
+                    } else {
+                        const stackY = target.y + target.h;
+                        const distToCenter = Math.hypot(target.x - newX, target.z - newZ);
+                        if (distToCenter < bestDist) {
+                            bestDist = distToCenter;
+                            bestTarget = target;
+                            bestPos = { x: target.x, z: target.z, y: stackY };
+                        }
                     }
                 }
             }
             
             if (bestTarget) {
-                // 显示高亮框
                 snapHighlight.visible = true;
                 snapHighlight.position.set(bestTarget.x, bestTarget.y + bestTarget.h/2, bestTarget.z);
-                snapHighlight.scale.set(bestTarget.l + 0.08, bestTarget.h + 0.08, bestTarget.w + 0.08);
+                snapHighlight.scale.set(bestTarget.l + 0.1, bestTarget.h + 0.1, bestTarget.w + 0.1);
                 return { snapped: true, x: bestPos.x, z: bestPos.z, y: bestPos.y };
             } else {
                 snapHighlight.visible = false;
                 return { snapped: false, x: newX, z: newZ, y: 0 };
             }
         }
+
+        function isValidDragPosition(dragged, newX, newZ, newY, allBoxes) {
+            for (let other of allBoxes) {
+                if (other.id === dragged.id) continue;
+                const overlapX = (dragged.l/2 + other.l/2) - Math.abs(newX - other.x);
+                const overlapZ = (dragged.w/2 + other.w/2) - Math.abs(newZ - other.z);
+                
+                if (overlapX > 0.05 && overlapZ > 0.05) {
+                    const isAbove = Math.abs(newY + dragged.h - other.y) < 0.1;
+                    const isBelow = Math.abs(newY - (other.y + other.h)) < 0.1;
+                    if (!isAbove && !isBelow) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // 拖拽系统
+        let dragTarget = null;
+        let isDragging = false;
+        let dragPlane = null;
+        let dragOffset = new THREE.Vector3();
+        let raycaster = new THREE.Raycaster();
+        let moveMode = false;
 
         function initDrag() {
             renderer.domElement.addEventListener('mousedown', (e) => {
@@ -1020,14 +1670,10 @@
                 }
             });
             
-            // 使用 requestAnimationFrame 优化拖拽流畅度
             let rafId = null;
-            let lastMouseX = 0, lastMouseY = 0;
             
             window.addEventListener('mousemove', (e) => {
                 if (!moveMode || !dragTarget || !isDragging) return;
-                
-                // 节流处理，让拖拽更流畅
                 if (rafId) return;
                 
                 rafId = requestAnimationFrame(() => {
@@ -1039,16 +1685,18 @@
                     if (raycaster.ray.intersectPlane(dragPlane, inter)) {
                         let newX = inter.x - dragOffset.x;
                         let newZ = inter.z - dragOffset.z;
-                        newX = Math.min(8, Math.max(-8, newX));
-                        newZ = Math.min(7, Math.max(-7, newZ));
+                        newX = Math.min(12, Math.max(-12, newX));
+                        newZ = Math.min(10, Math.max(-10, newZ));
                         
-                        // 使用吸附检测
                         const snapResult = findBestSnapPosition(dragTarget, newX, newZ, boxes);
+                        let targetY = snapResult.y;
                         
-                        dragTarget.x = snapResult.x;
-                        dragTarget.z = snapResult.z;
-                        dragTarget.y = snapResult.y;
-                        updateBoxVisual(dragTarget);
+                        if (isValidDragPosition(dragTarget, snapResult.x, snapResult.z, targetY, boxes)) {
+                            dragTarget.x = snapResult.x;
+                            dragTarget.z = snapResult.z;
+                            dragTarget.y = targetY;
+                            updateBoxVisual(dragTarget);
+                        }
                     }
                     rafId = null;
                 });
@@ -1079,7 +1727,7 @@
                 document.getElementById('statMode').innerHTML = '移动';
                 document.getElementById('moveModeBtn').classList.add('active');
                 document.getElementById('rotateModeBtn').classList.remove('active');
-                showToast('移动模式已开启，拖拽盒子移动，靠近自动吸附');
+                showToast('移动模式已开启，拖拽盒子移动，靠近自动吸附堆叠');
             } else {
                 renderer.domElement.style.cursor = 'default';
                 document.getElementById('statMode').innerHTML = '旋转';
@@ -1092,7 +1740,7 @@
         // 功能函数
         function copyData() {
             const stats = calcStats();
-            let text = '📦 包装设计数据报告\n━━━━━━━━━━━━━━━━━━━━\n';
+            let text = '📦 LX STUDIO 包装设计数据报告\n━━━━━━━━━━━━━━━━━━━━\n';
             boxes.forEach(b => {
                 text += `${b.name}: ${b.l.toFixed(2)}×${b.w.toFixed(2)}×${b.h.toFixed(2)}m\n`;
             });
@@ -1102,21 +1750,35 @@
             text += `总周长: ${stats.totalPerimeter.toFixed(2)} m\n`;
             text += `总对角线: ${stats.totalDiagonal.toFixed(2)} m\n`;
             text += `包装总面积: ${stats.totalArea.toFixed(2)} m²\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `📊 方盒分析:\n`;
+            text += `  方盒尺寸: ${stats.boxSize.w} × ${stats.boxSize.d} × ${stats.boxSize.h} m\n`;
+            text += `  方盒表面积: ${stats.boxSurfaceArea.toFixed(2)} m²\n`;
+            text += `  方盒体积: ${stats.boxVolume.toFixed(2)} m³\n`;
+            text += `  物体体积: ${stats.objectsVolume.toFixed(2)} m³\n`;
+            if (stats.wastePercent > 0) {
+                text += `  浪费空间: ${stats.wasteSpace.toFixed(2)} m³ (${stats.wastePercent.toFixed(1)}%) ⚠️\n`;
+            } else {
+                text += `  浪费空间: 0.00 (0%) ✨ 完美贴合！\n`;
+            }
+            text += `  堆叠方式: ${stats.layoutX} × ${stats.layoutZ} × ${stats.layoutY}\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `LX STUDIO · 智能包装设计系统`;
             navigator.clipboard.writeText(text);
             showToast('数据已复制');
         }
 
         function screenshot() {
             const link = document.createElement('a');
-            link.download = `包装设计-${Date.now()}.png`;
+            link.download = `LX包装设计-${Date.now()}.png`;
             link.href = renderer.domElement.toDataURL();
             link.click();
             showToast('截图已保存');
         }
 
         function resetView() {
-            camera.position.set(10, 8, 12);
-            controls.target.set(0, 0.6, 0);
+            camera.position.set(14, 10, 16);
+            controls.target.set(0, 0.8, 0);
             controls.update();
             showToast('视角已重置');
         }
@@ -1133,7 +1795,7 @@
         }
 
         function arrangeAll() {
-            const spacing = 2.4;
+            const spacing = 2.6;
             const cols = Math.ceil(Math.sqrt(boxes.length));
             boxes.forEach((b, i) => {
                 const row = Math.floor(i / cols);
@@ -1177,6 +1839,7 @@
         document.getElementById('resetViewBtn').onclick = resetView;
         document.getElementById('rotateModeBtn').onclick = () => setMoveMode(false);
         document.getElementById('moveModeBtn').onclick = () => setMoveMode(true);
+        document.getElementById('toggleLabelBtn').onclick = toggleAllLabels;
 
         // 材质切换
         document.querySelectorAll('.material-item').forEach(btn => {
@@ -1215,9 +1878,13 @@
             }, 600);
         };
 
-        // 动画循环
+        // 动画
+        let time = 0;
         function animate() {
             requestAnimationFrame(animate);
+            time += 0.01;
+            rotatingLight.position.x = 4.5 + Math.sin(time) * 2;
+            rotatingLight.position.z = 4.5 + Math.cos(time * 0.7) * 2;
             controls.update();
             stars.rotation.y += 0.0002;
             renderer.render(scene, camera);
@@ -1228,11 +1895,11 @@
         setMoveMode(false);
         animate();
 
-        // 演示示例盒子
+        // 演示示例
         setTimeout(() => {
-            addBox('演示盒1', 1.0, 0.8, 0.65, -2.5, -1.5, 0);
+            addBox('演示盒1', 1.0, 0.8, 0.65, -3, -2, 0);
             addBox('演示盒2', 0.85, 0.85, 0.85, 0, 0, 0);
-            addBox('演示盒3', 1.1, 0.7, 0.55, 2.8, 1.8, 0);
+            addBox('演示盒3', 1.1, 0.7, 0.55, 3, 2, 0);
         }, 100);
 
         window.addEventListener('resize', () => {
@@ -1240,6 +1907,7 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             labelRenderer.setSize(window.innerWidth, window.innerHeight);
+            resizeFireworksCanvas();
         });
     </script>
 </body>
